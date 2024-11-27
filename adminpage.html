@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="enter.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Admin Panel</h1>
+        <h3>Registered Users</h3>
+        <table border="1" align="center">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Password</th>
+                </tr>
+            </thead>
+            <tbody id="usersList"></tbody>
+        </table>
+        <a href="index.html">Back to Home</a>
+    </div>
+
+    <script>
+        // Fetch registered users from localStorage
+        const usersList = document.getElementById('usersList');
+        const users = JSON.parse(localStorage.getItem("users") || "[]"); // Retrieve the "users" array from localStorage
+
+        if (users.length > 0) {
+            users.forEach((user) => {
+                // Create a new table row for each user
+                const row = document.createElement("tr");
+                row.innerHTML = `<td>${user.username}</td><td>${user.password}</td>`;
+                usersList.appendChild(row);
+            });
+        } else {
+            // Show a message if no registered users are found
+            usersList.innerHTML = "<tr><td colspan='2'>No registered users found.</td></tr>";
+        }
+    </script>
+</body>
+</html>
